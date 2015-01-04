@@ -19,14 +19,6 @@
     }
 
     Tracker.autorun(showText);
-
-    var num = new ReactiveVar(1);
-    Tracker.autorun(function() {
-      output2.textContent = num.get();
-    });
-    increase.onclick = function() {
-      num.set(num.get()+1)
-    }
   </script>
 </body>
 </html>  
