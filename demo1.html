@@ -5,20 +5,22 @@
 </head>
 <body>
   <div id="output"></div>
-  <button onclick="text.set('PixelGrid')">PixelGrid</button>
-  <button onclick="text.set('CodeGrid')">CodeGrid</button>
-  <div id="output2"></div>
-  <button id="increase">++</button>
+  <button id="change">値を変える</button>
   <script src="./reactive-var.js"></script>
   <script src="./tracker.js"></script>
   <script>
     var text = new ReactiveVar("PixelGrid");
-
+    
     function showText() {
       document.querySelector("#output").textContent = text.get();
     }
-
+    
     Tracker.autorun(showText);
+    
+    // ボタンを押すとtextの値が変更される
+    document.querySelector("#change").onclick = function() {
+      text.set("CodeGrid");
+    }
   </script>
 </body>
 </html>  
