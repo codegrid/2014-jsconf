@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <div class="world" id="face"></div>
+  <script src="./frames.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+  $(function() {
+    
+    // フレームの情報をもとにbox-shadowに設定する文字列を生成する
+    function framesetGen (frames) {
+      var scale = 4;
+      return frames.map(function(frame) {
+        return frame.pixel.map(function(pixel) {
+          return pixel.c + " " + pixel.x*scale + "px " + pixel.y*scale + "px 0 " + scale + "px";
+        }).join(",");
+      });
+    }
+    
+    // フレームの配列をもとにアニメーションを開始する
+    function startAnimation() {
+      var $face = $("#face");
+      var frameSet = framesetGen(frames);
+      var framePosition = 0;
+      
+      setInterval(function() {
+        $face.css("box-shadow", frameSet[framePosition]);
+        
+        if(framePosition < frameSet.length) {
+          framePosition++;
+        }
+        else {
+          framePosition = 0;
+        }
+      }, 300)
+    }
+    
+    startAnimation();
+  });
+</script>
+</body>
+</html>
