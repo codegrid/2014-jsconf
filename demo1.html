@@ -1,24 +1,29 @@
-<div id="output"></div>
-<button onclick="text.set('PixelGrid')">PixelGrid</button>
-<button onclick="text.set('CodeGrid')">CodeGrid</button>
-<div id="output2"></div>
-<button id="increase">++</button>
-<script src="./reactive-var.js"></script>
-<script src="./tracker.js"></script>
-<script>
-var text = new ReactiveVar("PixelGrid");
+<!DOCTYPE html>
+<html>
+<body>
+  <div id="output"></div>
+  <button onclick="text.set('PixelGrid')">PixelGrid</button>
+  <button onclick="text.set('CodeGrid')">CodeGrid</button>
+  <div id="output2"></div>
+  <button id="increase">++</button>
+  <script src="./reactive-var.js"></script>
+  <script src="./tracker.js"></script>
+  <script>
+    var text = new ReactiveVar("PixelGrid");
 
-function showText() {
-  document.querySelector("#output").textContent = text.get();
-}
+    function showText() {
+      document.querySelector("#output").textContent = text.get();
+    }
 
-Tracker.autorun(showText);
+    Tracker.autorun(showText);
 
-var num = new ReactiveVar(1);
-Tracker.autorun(function() {
-  output2.textContent = num.get();
-});
-increase.onclick = function() {
-  num.set(num.get()+1)
-}
-</script>
+    var num = new ReactiveVar(1);
+    Tracker.autorun(function() {
+      output2.textContent = num.get();
+    });
+    increase.onclick = function() {
+      num.set(num.get()+1)
+    }
+  </script>
+</body>
+</html>  
