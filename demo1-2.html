@@ -7,7 +7,7 @@
 <body>
   <div>
     <input id="range" type="range" value="0" max="100">
-    <span id="value"></span><br>
+    <span id="value"></span>%<br>
     <progress id="progress" value="0" max="100"></progress><br>
     <button id="min">0</button>
     <button id="max">100</button>
@@ -19,7 +19,7 @@
     var percent = new ReactiveVar(0);
     
     // percentをHTML上のid="value"に表示する
-    function showPercent() {
+    function updatePercent() {
       document.querySelector('#value').textContent = percent.get();
     }
     
@@ -48,7 +48,7 @@
       percent.set(100);
     };
     
-    Tracker.autorun(showPercent);
+    Tracker.autorun(updatePercent);
     Tracker.autorun(updateProgress);
     Tracker.autorun(updateRange);
   </script>
