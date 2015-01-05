@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+</head>
+<body>
+  <div>
+    <input id="range" type="range" value="0" max="100">
+    <span id="value"></span><br>
+    <progress id="progress" value="0" max="100"></progress><br>
+    <button id="min">0</button>
+    <button id="max">100</button>
+  </div>
+
+  <script src="./reactive-var.js"></script>
+  <script src="./tracker.js"></script>
+  <script>
+    var percent = new ReactiveVar(0);
+    
+    // percentをHTML上のid="value"に表示する
+    function showPercent() {
+      document.querySelector('#value').textContent = percent.get();
+    }
+    
+    // percentをHTML上のid="range"のvalueに代入する
+    function updateRange() {
+      document.querySelector('#range').value = percent.get();
+    }
+    
+    // percentをHTML上のid="progress"のvalueに代入する
+    function updateProgress() {
+      document.querySelector("#progress").value = percent.get();
+    }
+    
+    // スライダーを動かしたらvalueの値を更新する
+    document.querySelector("#range").onchange = function() {
+      percent.set(this.value);
+    };
+    
+    // percentに0をセットする
+    document.querySelector("#min").onclick = function() {
+      percent.set(0);
+    };
+    
+    // percentに100をセットする
+    document.querySelector("#max").onclick = function() {
+      percent.set(100);
+    };
+    
+    Tracker.autorun(showPercent);
+    Tracker.autorun(updateProgress);
+    Tracker.autorun(updateRange);
+  </script>
+</body>
+</html>  
